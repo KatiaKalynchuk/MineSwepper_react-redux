@@ -41,7 +41,30 @@ class App extends Component {
                 i++;
             }
         }
-        this.props.actions.updateField(field);
+        this.startMineCounter(field);
+    }
+
+    startMineCounter(field) { //пробегает по всем ячейкам и вызывает расчет кол-ва мин рядом
+      for (let i = 0; i < this.props.options.width; i++) {
+        for (let j = 0; j < this.props.options.height; j++) {
+          this.mineAroundCounter(i, j, field);
+        }
+      }
+      this.props.actions.updateField(field);
+    }
+
+    mineAroundCounter(x, y, field) { // считает количество мин вокруг ячейки и записывает его в нее
+      let xStart = x > 0 ? x-1 : x;
+      let yStart = y > 0 ? y-1 : y;
+      let xEnd = x < this.props.options.width-1 ? x+1 : x;
+      let yEnd = y < this.props.options.height-1 ? y+1 : y;
+      let count = 0;
+      for (let i = xStart; i <= xEnd; i++){
+        for (let j = yStart; j <= yEnd; j++){
+          if (field[i][j].isMine && !(x == i && y == j)) count++;
+        }
+      }
+      field[x][y].mineAround = count;
     }
 
     componentWillMount(){
