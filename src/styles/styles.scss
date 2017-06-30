@@ -25,11 +25,23 @@ body {
 }
 
 .square {
-  background-color: white;
-  color: blue;
+  background-color: navajowhite;
   display: inline-block;
   border-radius: 15px;
   width: 30px;
   height: 30px;
+  vertical-align: top;
+
+  span {
+    display: none;
+  }
+}
+.square-open {
+  background-color: white;
+  color: blue;
+
+  span {
+    display: block;
+  }
 }
 
