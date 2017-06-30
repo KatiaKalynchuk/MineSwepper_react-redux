@@ -7,13 +7,6 @@ import * as actions from '../actions/actions';
 import Header from '../components/Header';
 import Field from '../components/Field';
 
-class Point {
-    constructor() {
-        this.isMine = false; //стоит ли мина
-        this.mineAround = 0; //мин рядом
-        this.isOpen = false; //открыта ли
-    }
-}
 class App extends Component {
     constructor(props) {
         super(props);
@@ -24,7 +17,13 @@ class App extends Component {
         for (let i = 0; i < this.props.options.width; i++) { //проходим по колонкам
             let tmp = []; //создаем колонку
             for (let j = 0; j < this.props.options.height; j++) { //заполняем ее ячейками
-                tmp.push(new Point());
+                tmp.push({
+                    isMine: false, //стоит ли мина
+                    mineAround: 0, //мин рядом
+                    isOpen: false, //открыта ли
+                    coordinates: {x: i, y: j}
+                  }
+                );
             }
             field.push(tmp); //вставляем колонку в поле
         }
@@ -72,11 +71,11 @@ class App extends Component {
     }
 
     render() {
-        const {options} = this.props;
+        const {options,actions} = this.props;
         return (
             <div className="index">
                 <Header/>
-                <Field field={options.field}/>
+                <Field field={options.field} actions={actions}/>
             </div>
         );
     }
