@@ -1,4 +1,4 @@
-import {UPDATE_FIELD} from '../constants/actionTypes';
+import {UPDATE_FIELD, OPEN_CELL} from '../constants/actionTypes';
 
 const initialState = {
     width: 10, //ширина поля
@@ -14,12 +14,10 @@ export default function reducerOptions(state = initialState, action) {
             return Object.assign({}, state, {
                 field: action.payload
             });
-
-        case 'SET_BOMB':
-            return Object.assign({}, state, {
-                field: state.field[action.x][action.y].isBomb = action.isBomb
-            });
-
+        case OPEN_CELL:
+            let newState = Object.assign({}, state);
+            newState.field[action.x][action.y].isOpen = true;
+            return newState;
         default:
             return state;
     }
