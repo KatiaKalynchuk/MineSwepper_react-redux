@@ -9,7 +9,7 @@ body {
   padding: 0;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 14px;
-  color: #fff;
+  color: #b8ff2c;
   background: #222;
 }
 
@@ -23,14 +23,39 @@ body {
   text-align: center;
   box-sizing: border-box;
 }
+.header button {
+  background-color: #b8ff2c;
+  border: none;
+  width: 90px;
+  height: 40px;
+  border-radius: 20px;
+  color: rgb(25, 142, 159);
+  font-size: 20px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: all 0.5s;
 
+  &:focus {
+    outline: none;
+  }
+
+  &:hover{
+    background-color: #2ce4ff;
+    color: white;
+  }
+}
 .square {
-  background-color: navajowhite;
+  background-color: #2ce4ff;
   display: inline-block;
-  border-radius: 15px;
-  width: 30px;
-  height: 30px;
+  border-radius: 20px;
+  width: 40px;
+  height: 40px;
   vertical-align: top;
+  transition: all 0.5s;
+
+  &:hover{
+    background-color: #1e8695;
+  }
 
   span {
     display: none;
@@ -38,13 +63,16 @@ body {
 }
 .square-open {
   background-color: white;
-  color: blue;
+  color: #333;
+  line-height: 40px;
+  font-weight: bold;
+  font-size: 18px;
 
   span {
     display: block;
   }
 }
 .flag {
-  background-color: green;
+  background-color: #b8ff2c;
 }
 
