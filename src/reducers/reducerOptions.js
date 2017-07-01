@@ -1,11 +1,12 @@
-import {UPDATE_FIELD, OPEN_CELL} from '../constants/actionTypes';
+import {UPDATE_FIELD, OPEN_CELL, STATUS_LOSE, SET_FLAG} from '../constants/actionTypes';
 
 const initialState = {
     width: 10, //ширина поля
     height: 10, //высота поля
     bombCount: 10, //количество мин
     openCount: 0,//количество открытых
-    field: [] //поле
+    field: [], //поле
+    isLose: false
 };
 
 export default function reducerOptions(state = initialState, action) {
@@ -18,6 +19,16 @@ export default function reducerOptions(state = initialState, action) {
             let newState = Object.assign({}, state);
             newState.field[action.x][action.y].isOpen = true;
             return newState;
+        case STATUS_LOSE:
+            return Object.assign({}, state, {
+            isLose: true
+            });
+        case SET_FLAG:
+            if (!state.field[action.x][action.y].isOpen){
+                let newState = Object.assign({}, state);
+                newState.field[action.x][action.y].isFlag = !newState.field[action.x][action.y].isFlag;
+                return newState;
+            }
         default:
             return state;
     }
