@@ -21,7 +21,8 @@ class App extends Component {
                     isMine: false, //стоит ли мина
                     mineAround: 0, //мин рядом
                     isOpen: false, //открыта ли
-                    coordinates: {x: i, y: j}
+                    coordinates: {x: i, y: j},
+                    isFlag: false
                   }
                 );
             }
@@ -44,26 +45,26 @@ class App extends Component {
     }
 
     startMineCounter(field) { //пробегает по всем ячейкам и вызывает расчет кол-ва мин рядом
-      for (let i = 0; i < this.props.options.width; i++) {
-        for (let j = 0; j < this.props.options.height; j++) {
-          this.mineAroundCounter(i, j, field);
+        for (let i = 0; i < this.props.options.width; i++) {
+            for (let j = 0; j < this.props.options.height; j++) {
+              this.mineAroundCounter(i, j, field);
+            }
         }
-      }
-      this.props.actions.updateField(field);
+        this.props.actions.updateField(field);
     }
 
     mineAroundCounter(x, y, field) { // считает количество мин вокруг ячейки и записывает его в нее
-      let xStart = x > 0 ? x-1 : x;
-      let yStart = y > 0 ? y-1 : y;
-      let xEnd = x < this.props.options.width-1 ? x+1 : x;
-      let yEnd = y < this.props.options.height-1 ? y+1 : y;
-      let count = 0;
-      for (let i = xStart; i <= xEnd; i++){
-        for (let j = yStart; j <= yEnd; j++){
-          if (field[i][j].isMine && !(x == i && y == j)) count++;
+        let xStart = x > 0 ? x-1 : x;
+        let yStart = y > 0 ? y-1 : y;
+        let xEnd = x < this.props.options.width-1 ? x+1 : x;
+        let yEnd = y < this.props.options.height-1 ? y+1 : y;
+        let count = 0;
+        for (let i = xStart; i <= xEnd; i++){
+            for (let j = yStart; j <= yEnd; j++){
+              if (field[i][j].isMine && !(x == i && y == j)) count++;
+            }
         }
-      }
-      field[x][y].mineAround = count;
+        field[x][y].mineAround = count;
     }
 
     componentWillMount(){
@@ -75,7 +76,7 @@ class App extends Component {
         return (
             <div className="index">
                 <Header/>
-                <Field field={options.field} actions={actions}/>
+                <Field field={options.field} actions={actions} fillField={this.fillField}/>
             </div>
         );
     }
@@ -83,13 +84,13 @@ class App extends Component {
 }
 
 App.propTypes = {
-  actions: PropTypes.object.isRequired
+    actions: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
-  return {
-    options: state.reducerOptions
-  };
+    return {
+        options: state.reducerOptions
+    };
 }
 
 function mapDispatchToProps(dispatch) {
