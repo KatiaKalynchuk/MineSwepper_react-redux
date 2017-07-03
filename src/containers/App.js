@@ -34,9 +34,8 @@ class App extends Component {
       }
       const setBomb = (field) => {
           for (let i = 0; i < options.bombCount;) { // пока не все мины расставлены
-              let x = parseInt(Math.random() * options.width - 0.0001); //генерируем координату Х
-              let y = parseInt(Math.random() * options.height - 0.0001); //генерируем координату У
-              // console.log(this.props.options)
+              let x = parseInt(Math.random() * this.props.options.width - 0.0001); //генерируем координату Х
+              let y = parseInt(Math.random() * this.props.options.height - 0.0001); //генерируем координату У
               if (!(field[x][y].isMine)) { // если сдесь еще нет мины
                   field[x][y].isMine = true;
                   i++;
@@ -46,8 +45,8 @@ class App extends Component {
       }
 
       const startMineCounter = (field) => { //пробегает по всем ячейкам и вызывает расчет кол-ва мин рядом
-          for (let i = 0; i < options.width; i++) {
-              for (let j = 0; j < options.height; j++) {
+          for (let i = 0; i < this.props.options.width; i++) {
+              for (let j = 0; j < this.props.options.height; j++) {
                 mineAroundCounter(i, j, field);
               }
           }
@@ -57,12 +56,12 @@ class App extends Component {
       const mineAroundCounter = (x, y, field) => { // считает количество мин вокруг ячейки и записывает его в нее
           let xStart = x > 0 ? x-1 : x;
           let yStart = y > 0 ? y-1 : y;
-          let xEnd = x < options.width-1 ? x+1 : x;
-          let yEnd = y < options.height-1 ? y+1 : y;
+          let xEnd = x < this.props.options.width-1 ? x+1 : x;
+          let yEnd = y < this.props.options.height-1 ? y+1 : y;
           let count = 0;
           for (let i = xStart; i <= xEnd; i++){
               for (let j = yStart; j <= yEnd; j++){
-                if (field[i][j].isMine && !(x == i && y == j)) count++;
+                  if (field[i][j].isMine && !(x == i && y == j)) count++;
               }
           }
           field[x][y].mineAround = count;
@@ -70,12 +69,11 @@ class App extends Component {
 
           return (
               <div className="index">
-                <Header actions={actions} fillField={fillField}/>
-                <Field options={options} actions={actions} fillField={fillField}/>
+                  <Header actions={actions} fillField={fillField}/>
+                  <Field options={options} actions={actions} fillField={fillField}/>
               </div>
           );
       }
-
 }
 
 App.propTypes = {
@@ -90,9 +88,9 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return {
-      actions: bindActionCreators(actions, dispatch)
-  };
+    return {
+        actions: bindActionCreators(actions, dispatch)
+    };
 }
 
 export default connect(

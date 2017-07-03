@@ -3,16 +3,24 @@ import shortid from 'shortid';
 import PropTypes from 'prop-types';
 
 class Field extends Component {
+
+    componentWillReceiveProps(nextProps) {
+        if(this.props.options.height !== nextProps.options.height) {
+            this.props.fillField();
+        }
+    }
     render(){
         const {options, actions, fillField} = this.props;
         const openCell = (event) => {
             let x = event.target.getAttribute('data-x');
             let y = event.target.getAttribute('data-y');
             if (!options.field[x][y].isOpen){
+                this.setState({
+                    field: options.field
+                })
                 recurceOpen(x, y);
             }
             if (options.field[x][y].isMine) {
-                alert('Game over');
                 fillField();
             }
         };
@@ -40,12 +48,14 @@ class Field extends Component {
             }
             if (options.field[x][y].isMine){
                 alert('Game over');
+                fillField();
             } else {
-                this.props.actions.openCell(x,y);
-                this.props.actions.countInc();
+                actions.openCell(x,y);
+                actions.countInc();
                 if (options.width * options.height - options.bombCount == options.openCount){ // если ячейка последняя
                     alert('You win!'); // победа
                 }
+
             if (options.field[x][y].mineAround == 0){ //если рядом мин нет, то
                 let xStart = x > 0 ? x-1 : x;
                 let yStart = y > 0 ? y-1 : y;

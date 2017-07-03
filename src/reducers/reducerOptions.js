@@ -30,9 +30,9 @@ export default function reducerOptions(state = initialState, action) {
                 return newState;
             }
         case COUNT:
-            return Object.assign({}, state, {
-              openCount: action.payload
-            });
+            newState = Object.assign({}, state);
+            newState.openCount += action.payload;
+            return newState;
         case DIFFICULTY:
         return Object.assign({}, state, {
             width: action.width,

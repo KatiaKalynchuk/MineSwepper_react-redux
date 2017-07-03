@@ -6,32 +6,27 @@ const Header = ({actions, fillField}) => {
   const setDifficulty = (e) => {
       let elValue = e.target.innerHTML;
       switch(elValue) {
-          case 'easy':
-            actions.setDifficulty(10, 10, 10);
-      }
-      switch(elValue) {
-          case 'middle':
-            actions.setDifficulty(15, 15, 15);
-      }
-      switch(elValue) {
-          case 'high':
-            actions.setDifficulty(20, 20, 20);
-      }
-  };
-
-  const start = () => {
+          case 'Easy':
+              actions.setDifficulty(10, 10, 10);
+              break;
+          case 'Middle':
+              actions.setDifficulty(15, 15, 20);
+              break;
+          case 'Hard':
+              actions.setDifficulty(20, 20, 40);
+        }
       fillField();
   };
 
   return (
       <header className="header">
           <h1>MineSwepper</h1>
+          <p>To start the game, choose the difficulty</p>
           <div className="difficulty">
-              <button onClick={setDifficulty}>easy</button>
-              <button onClick={setDifficulty}>middle</button>
-              <button onClick={setDifficulty}>high</button>
+              <button onClick={setDifficulty}>Easy</button>
+              <button onClick={setDifficulty}>Middle</button>
+              <button onClick={setDifficulty}>Hard</button>
           </div>
-          <button onClick={start}>Start</button>
       </header>
   );
 };
