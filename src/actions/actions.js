@@ -16,3 +16,11 @@ export const setFlag = (x, y) => {
     return {type: types.SET_FLAG, x, y};
 };
 
+export const countInc = () => {
+  return {type: types.COUNT, payload: 1};
+};
+
+export const setDifficulty = (height, width, bombCount) => {
+  return {type: types.DIFFICULTY, height, width, bombCount};
+};
+
