@@ -35,9 +35,9 @@ export default function reducerOptions(state = initialState, action) {
             });
         case DIFFICULTY:
         return Object.assign({}, state, {
-          width: action.width,
-          height: action.height,
-          bombCount: action.bombCount
+            width: action.width,
+            height: action.height,
+            bombCount: action.bombCount
         });
         default:
             return state;
