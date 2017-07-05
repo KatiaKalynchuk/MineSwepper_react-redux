@@ -1,8 +1,10 @@
-import { combineReducers } from 'redux';
+import {combineReducers} from 'redux';
 import reducerOptions from './reducerOptions';
+import reducerPoint from './reducerPoint';
 
 const rootReducer = combineReducers({
-    reducerOptions
+    reducerOptions,
+    reducerPoint
 });
 
 export default rootReducer;
