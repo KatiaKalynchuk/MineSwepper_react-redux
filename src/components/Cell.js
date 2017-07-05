@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 
 class Cell extends Component {
-    render() {
+    render () {
         const {actions, options, row} = this.props;
 
         const openCell = (event) => {
