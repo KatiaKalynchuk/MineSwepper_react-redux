@@ -5,4 +5,3 @@ export const STATUS_WIN = 'STATUS_WIN';
 export const SET_FLAG = 'SET_FLAG';
 export const COUNT = 'COUNT';
 export const DIFFICULTY = 'DIFFICULTY';
-export const POINT = 'POINT';
