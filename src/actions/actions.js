@@ -24,3 +24,14 @@ export const setDifficulty = (height, width, bombCount) => {
   return {type: types.DIFFICULTY, height, width, bombCount};
 };
 
+export const generatePoint = (x, y, point) => {
+  return {type: types.POINT, x, y, point};
+};
+
+export const win = () => {
+  return {type: types.STATUS_WIN};
+};
+
+export const lose = () => {
+  return {type: types.STATUS_LOSE};
+};
