@@ -1,12 +1,13 @@
-import {UPDATE_FIELD, OPEN_CELL, STATUS_LOSE, SET_FLAG, COUNT, DIFFICULTY} from '../constants/actionTypes';
+import {UPDATE_FIELD, OPEN_CELL, STATUS_LOSE, STATUS_WIN, SET_FLAG, COUNT, DIFFICULTY} from '../constants/actionTypes';
 
 const initialState = {
-    width: 10, //ширина поля
-    height: 10, //высота поля
-    bombCount: 10, //количество мин
+    width: 5, //ширина поля
+    height: 5, //высота поля
+    bombCount: 5, //количество мин
     openCount: 0,//количество открытых
     field: [], //поле
-    isLose: false
+    isLose: false,
+    isWin: false
 };
 
 export default function reducerOptions(state = initialState, action) {
@@ -21,10 +22,14 @@ export default function reducerOptions(state = initialState, action) {
             return newState;
         case STATUS_LOSE:
             return Object.assign({}, state, {
-              isLose: true
+                isLose: true
+            });
+        case STATUS_WIN:
+            return Object.assign({}, state, {
+                isWin: true
             });
         case SET_FLAG:
-            if (!state.field[action.x][action.y].isOpen){
+            if (!state.field[action.x][action.y].isOpen) {
                 let newState = Object.assign({}, state);
                 newState.field[action.x][action.y].isFlag = !newState.field[action.x][action.y].isFlag;
                 return newState;
@@ -34,10 +39,10 @@ export default function reducerOptions(state = initialState, action) {
             newState.openCount += action.payload;
             return newState;
         case DIFFICULTY:
-        return Object.assign({}, state, {
-            width: action.width,
-            height: action.height,
-            bombCount: action.bombCount
+            return Object.assign({}, state, {
+                width: action.width,
+                height: action.height,
+                bombCount: action.bombCount
         });
         default:
             return state;
