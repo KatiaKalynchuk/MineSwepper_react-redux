@@ -14,7 +14,7 @@ class Field extends Component {
         }
     }
 
-    render () {
+    render() {
         const {options, fillField, actions} = this.props;
         return (
             <div className="field">
